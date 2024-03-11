@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Lista de Incidencias{% endblock %}
+
+{% block body %}
+    <h1>Lista de Incidencias</h1>
+
+    {% if incidencias is empty %}
+        <p>No hay incidencias registradas.</p>
+    {% else %}
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Título</th>
+                    <th>Fecha de Creación</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for incidencia in incidencias %}
+                    <tr>
+                        <td>{{ incidencia.id }}</td>
+                        <td>{{ incidencia.titulo }}</td>
+                        <td>{{ incidencia.fechaCreacion ? incidencia.fechaCreacion|date('Y-m-d H:i:s') : 'N/A' }}</td>
+                        <td>{{ incidencia.estado }}</td>
+                        <td>
+                            <a href="{{ path('app_incidencia_show', {'id': incidencia.id}) }}">Ver Detalles</a>
+                            <a href="{{ path('app_incidencia_edit', {'id': incidencia.id}) }}">Editar</a>
+                            <a href="{{ path('app_incidencia_delete', {'id': incidencia.id}) }}">Eliminar</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+    
+    <a href="{{ path('app_incidencia_new') }}">Crear Nueva Incidencia</a><br>
+    <a href="{{ path('home') }}">Inicio</a><br>
+{% endblock %}

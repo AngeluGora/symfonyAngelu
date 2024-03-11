@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Detalles del Usuario{% endblock %}
+
+{% block body %}
+    <h1>Detalles del Usuario</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Email</th>
+                <th>Nombre</th>
+                <th>Apellidos</th>
+                <th>Teléfono</th>
+                <th>Foto</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ usuario.id }}</td>
+                <td>{{ usuario.email }}</td>
+                <td>{{ usuario.nombre }}</td>
+                <td>{{ usuario.apellidos }}</td>
+                <td>{{ usuario.telefono }}</td>
+                <td>
+                    {% if usuario.foto %}
+                        <img src="{{ usuario.foto }}" alt="Foto de perfil" width="100">
+                    {% else %}
+                        Sin foto
+                    {% endif %}
+                </td>
+                <td>
+                    <a href="{{ path('app_usuario_edit', {'id': usuario.id}) }}">Editar</a>
+                    <a href="{{ path('app_usuario_delete', {'id': usuario.id}) }}">Eliminar</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <a href="{{ path('app_usuarios') }}">Volver a la Lista de Usuarios</a>
+{% endblock %}

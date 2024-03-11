@@ -1,0 +1,36 @@
+{# templates/cliente/form.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Formulario de Cliente{% endblock %}
+
+{% block body %}
+    <h1>Formulario de Cliente</h1>
+
+    {{ form_start(formularioCliente) }}
+    {{ form_errors(formularioCliente) }}
+
+    <div class="form-group">
+        {{ form_label(formularioCliente.nombre) }}
+        {{ form_widget(formularioCliente.nombre, {'attr': {'class': 'form-control'}}) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(formularioCliente.apellidos) }}
+        {{ form_widget(formularioCliente.apellidos, {'attr': {'class': 'form-control'}}) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(formularioCliente.telefono) }}
+        {{ form_widget(formularioCliente.telefono, {'attr': {'class': 'form-control'}}) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(formularioCliente.direccion) }}
+        {{ form_widget(formularioCliente.direccion, {'attr': {'class': 'form-control'}}) }}
+    </div>
+
+    <button type="submit" class="btn btn-primary">Guardar</button>
+
+    {{ form_end(formularioCliente) }}
+{% endblock %}

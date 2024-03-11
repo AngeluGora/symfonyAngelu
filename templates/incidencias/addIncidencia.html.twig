@@ -1,0 +1,24 @@
+{# templates/incidencia/addIncidencia.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Incidencia{% endblock %}
+
+{% block body %}
+    <h1>Incidencia</h1>
+
+    {{ form_start(formularioIncidencia) }}
+        {{ form_errors(formularioIncidencia) }}
+
+        <div class="form-group">
+            {{ form_label(formularioIncidencia.titulo) }}
+            {{ form_widget(formularioIncidencia.titulo, {'attr': {'class': 'form-control'}}) }}
+        </div>
+
+        <div class="form-group">
+            {{ form_label(formularioIncidencia.estado) }}
+            {{ form_widget(formularioIncidencia.estado, {'attr': {'class': 'form-control'}}) }}
+        </div>
+
+    {{ form_end(formularioIncidencia) }}
+{% endblock %}

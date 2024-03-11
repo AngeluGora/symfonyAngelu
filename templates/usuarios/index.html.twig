@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Lista de Usuarios{% endblock %}
+
+{% block body %}
+    <h1>Lista de Usuarios</h1>
+
+    {% if usuarios is empty %}
+        <p>No hay usuarios registrados.</p>
+    {% else %}
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Email</th>
+                    <th>Nombre</th>
+                    <th>Apellidos</th>
+                    <th>Teléfono</th>
+                    <th>Foto</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for usuario in usuarios %}
+                    <tr>
+                        <td>{{ usuario.id }}</td>
+                        <td>{{ usuario.email }}</td>
+                        <td>{{ usuario.nombre }}</td>
+                        <td>{{ usuario.apellidos }}</td>
+                        <td>{{ usuario.telefono }}</td>
+                        <td>
+                            {% if usuario.foto %}
+                                <img src="{{ usuario.foto }}" alt="Foto de perfil" width="100">
+                            {% else %}
+                                Sin foto
+                            {% endif %}
+                        </td>
+                        <td>
+                            <a href="{{ path('app_usuario_show', {'id': usuario.id}) }}">Ver Detalles</a>
+                            <a href="{{ path('app_usuario_edit', {'id': usuario.id}) }}">Editar</a>
+                            <a href="{{ path('app_usuario_delete', {'id': usuario.id}) }}">Eliminar</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+    
+    <a href="{{ path('app_usuario_new') }}">Crear Nuevo Usuario</a>
+{% endblock %}

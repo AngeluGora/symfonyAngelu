@@ -11,6 +11,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 class RegistrationFormType extends AbstractType
 {
@@ -18,38 +19,40 @@ class RegistrationFormType extends AbstractType
     {
         $builder
             ->add('email')
+            ->add('nombre')
+            ->add('apellidos')
+            ->add('telefono')
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
                 'constraints' => [
                     new IsTrue([
-                        'message' => 'You should agree to our terms.',
+                        'message' => 'Debes aceptar nuestros términos.',
                     ]),
                 ],
             ])
             ->add('plainPassword', PasswordType::class, [
-                // instead of being set onto the object directly,
-                // this is read and encoded in the controller
                 'mapped' => false,
                 'attr' => ['autocomplete' => 'new-password'],
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Please enter a password',
+                        'message' => 'Por favor, introduce una contraseña.',
                     ]),
                     new Length([
                         'min' => 6,
-                        'minMessage' => 'Your password should be at least {{ limit }} characters',
-                        // max length allowed by Symfony for security reasons
+                        'minMessage' => 'Tu contraseña debe tener al menos {{ limit }} caracteres.',
                         'max' => 4096,
                     ]),
                 ],
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => Usuario::class,
+            'constraints' => [
+                new UniqueEntity(['fields' => 'email', 'message' => 'Ya existe una cuenta con este correo electrónico.']),
+            ],
         ]);
     }
 }

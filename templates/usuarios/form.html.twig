@@ -1,0 +1,50 @@
+{# templates/usuario/form.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Formulario de Usuario{% endblock %}
+
+{% block body %}
+    <h1>Formulario de Usuario</h1>
+
+    {{ form_start(formularioUsuario) }}
+    {{ form_errors(formularioUsuario) }}
+
+    <div class="form-group">
+        {{ form_label(formularioUsuario.email) }}
+        {{ form_widget(formularioUsuario.email, {'attr': {'class': 'form-control'}}) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(formularioUsuario.password.first) }}
+        {{ form_widget(formularioUsuario.password.first, {'attr': {'class': 'form-control'}}) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(formularioUsuario.password.second) }}
+        {{ form_widget(formularioUsuario.password.second, {'attr': {'class': 'form-control'}}) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(formularioUsuario.nombre) }}
+        {{ form_widget(formularioUsuario.nombre, {'attr': {'class': 'form-control'}}) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(formularioUsuario.apellidos) }}
+        {{ form_widget(formularioUsuario.apellidos, {'attr': {'class': 'form-control'}}) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(formularioUsuario.telefono) }}
+        {{ form_widget(formularioUsuario.telefono, {'attr': {'class': 'form-control'}}) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(formularioUsuario.foto) }}
+        {{ form_widget(formularioUsuario.foto, {'attr': {'class': 'form-control-file'}}) }}
+    </div>
+
+
+    {{ form_end(formularioUsuario) }}
+{% endblock %}
