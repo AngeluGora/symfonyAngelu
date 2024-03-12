@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class ClientesController extends AbstractController
 {
@@ -18,7 +19,8 @@ class ClientesController extends AbstractController
     {
         $this->entityManager = $entityManager;
     }
-    #[IsGranted('ROLE_USER', statusCode: 403, exceptionCode: 10010)]
+    
+    #[IsGranted('ROLE_USER')]
     #[Route('/clientes', name: 'app_clientes')]
     public function index(): Response
     {
@@ -28,7 +30,8 @@ class ClientesController extends AbstractController
             'clientes' => $clientes,
         ]);
     }
-    #[IsGranted('ROLE_USER', statusCode: 403, exceptionCode: 10010)]
+    
+    #[IsGranted('ROLE_USER')]
     #[Route('/cliente/new', name: 'app_cliente_new')]
     public function new(Request $request): Response
     {
@@ -49,7 +52,8 @@ class ClientesController extends AbstractController
             'formularioCliente' => $form->createView(),
         ]);
     }
-    #[IsGranted('ROLE_USER', statusCode: 403, exceptionCode: 10010)]
+    
+    #[IsGranted('ROLE_USER')]
     #[Route('/clientes/{id}/edit', name: 'app_cliente_edit')]
     public function edit(Request $request, Cliente $cliente): Response
     {
@@ -68,7 +72,8 @@ class ClientesController extends AbstractController
             'formularioCliente' => $form->createView(),
         ]);
     }
-    #[IsGranted('ROLE_USER', statusCode: 403, exceptionCode: 10010)]
+    
+    #[IsGranted('ROLE_USER')]
     #[Route('/clientes/{id}', name: 'app_cliente_show')]
     public function show(int $id): Response
     {
@@ -85,7 +90,8 @@ class ClientesController extends AbstractController
             'cliente' => $cliente, // Pasar el cliente a la vista
         ]);
     }
-    #[IsGranted('ROLE_USER', statusCode: 403, exceptionCode: 10010)]
+    
+    #[IsGranted('ROLE_USER')]
     #[Route('/clientes/{id}/delete', name: 'app_cliente_delete')]
     public function delete(Request $request, Cliente $cliente): Response
     {

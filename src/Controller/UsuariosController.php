@@ -11,7 +11,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use App\Form\UsuarioType;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 
 class UsuariosController extends AbstractController
@@ -22,7 +22,8 @@ class UsuariosController extends AbstractController
     {
         $this->entityManager = $entityManager;
     }
-    #[IsGranted('ROLE_USER', statusCode: 403, exceptionCode: 10010)]
+    
+    #[IsGranted('ROLE_USER')]
     #[Route('/usuarios', name: 'app_usuarios')]
     public function index(): Response
     {
@@ -32,7 +33,8 @@ class UsuariosController extends AbstractController
             'usuarios' => $usuarios,
         ]);
     }
-    #[IsGranted('ROLE_USER', statusCode: 403, exceptionCode: 10010)]
+    
+    #[IsGranted('ROLE_USER')]
     #[Route('/usuarios/new', name: 'app_usuario_new')]
     public function new(Request $request): Response
     {
@@ -55,7 +57,7 @@ class UsuariosController extends AbstractController
     }
 
     
-    #[IsGranted('ROLE_USER', statusCode: 403, exceptionCode: 10010)]
+    #[IsGranted('ROLE_USER')]
     #[Route('/usuarios/{id}/edit', name: 'app_usuario_edit')]
     public function edit(Request $request, Usuario $usuario, UserPasswordHasherInterface $passwordHasher): Response
     {
@@ -112,7 +114,8 @@ class UsuariosController extends AbstractController
     
 
 
-    #[IsGranted('ROLE_USER', statusCode: 403, exceptionCode: 10010)]
+    
+    #[IsGranted('ROLE_USER')]
     #[Route('/usuarios/{id}', name: 'app_usuario_show')]
     public function show(int $id): Response
     {
