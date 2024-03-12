@@ -2,7 +2,17 @@
 
 {% block title %}Detalles del Cliente{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('estilos.css') }}">
+{% endblock %}
+
 {% block body %}
+    <style>
+        body {
+            background-color: #ccc; /* Cambia el color de fondo aquí */
+        }
+    </style>
     <h1>Detalles del Cliente</h1>
 
     <table>

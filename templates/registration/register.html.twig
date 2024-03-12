@@ -1,23 +1,61 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Register{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('estilos.css') }}">
+{% endblock %}
 
 {% block body %}
-    <h1>Register</h1>
-
-    {{ form_start(registrationForm) }}
+    <style>
+        body {
+            background-color: #ccc; /* Cambia el color de fondo aquí */
+        }
+    </style>
+    <div class="formulario">
+    <h1>Registro</h1>
+    {{ form_start(registrationForm, {'attr': {'class': 'registration-form'}}) }}
     {{ form_errors(registrationForm) }}
 
-    {{ form_row(registrationForm.email) }}
-    {{ form_row(registrationForm.nombre) }}
-    {{ form_row(registrationForm.apellidos) }}
-    {{ form_row(registrationForm.telefono) }}
-    {{ form_row(registrationForm.plainPassword, {
-        label: 'Password'
-    }) }}
-    {{ form_row(registrationForm.agreeTerms) }}
+    <div class="form-row">
+        {{ form_label(registrationForm.email, 'Email', {'label_attr': {'class': 'form-label'}}) }}
+        {{ form_widget(registrationForm.email, {'attr': {'class': 'form-control'}}) }}
+    </div>
 
-    <button type="submit" class="btn">Register</button>
-{{ form_end(registrationForm) }}
+    <div class="form-row">
+        {{ form_label(registrationForm.nombre, 'Nombre', {'label_attr': {'class': 'form-label'}}) }}
+        {{ form_widget(registrationForm.nombre, {'attr': {'class': 'form-control'}}) }}
+    </div>
+
+    <div class="form-row">
+        {{ form_label(registrationForm.apellidos, 'Apellidos', {'label_attr': {'class': 'form-label'}}) }}
+        {{ form_widget(registrationForm.apellidos, {'attr': {'class': 'form-control'}}) }}
+    </div>
+
+    <div class="form-row">
+        {{ form_label(registrationForm.telefono, 'Teléfono', {'label_attr': {'class': 'form-label'}}) }}
+        {{ form_widget(registrationForm.telefono, {'attr': {'class': 'form-control'}}) }}
+    </div>
+
+    <div class="form-row">
+        {{ form_label(registrationForm.plainPassword, 'Password', {'label_attr': {'class': 'form-label'}}) }}
+        {{ form_widget(registrationForm.plainPassword, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(registrationForm.plainPassword) }} {# Aquí se mostrará el mensaje de error #}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(registrationForm.foto) }}
+        {{ form_widget(registrationForm.foto, {'attr': {'class': 'form-control-file'}}) }}
+    </div>
+
+    <div class="form-row">
+        {{ form_label(registrationForm.agreeTerms) }}
+        {{ form_widget(registrationForm.agreeTerms) }}
+    </div>
+
+    <button type="submit" class="btn btn-primary">Register</button>
+    {{ form_end(registrationForm) }}
+
+</div>
 
 {% endblock %}

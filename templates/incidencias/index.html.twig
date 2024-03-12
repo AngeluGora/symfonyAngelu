@@ -2,7 +2,17 @@
 
 {% block title %}Lista de Incidencias{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('estilos.css') }}">
+{% endblock %}
+
 {% block body %}
+    <style>
+        body {
+            background-color: #ccc; /* Cambia el color de fondo aquí */
+        }
+    </style>
     <h1>Lista de Incidencias</h1>
 
     {% if incidencias is empty %}

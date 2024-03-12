@@ -1,0 +1,111 @@
+
+.login-form {
+    max-width: 400px;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+.formulario{
+    max-width: 400px;
+    margin: 10% auto;
+}
+.form-control {
+    max-width:  400px; 
+    margin: 5px;
+    padding: 8px; /* Reducir el relleno */
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.btn {
+    display: block; /* Hacer que el botón ocupe todo el ancho */
+    width: 100%;
+    padding: 10px; /* Ajustar el relleno */
+    margin-top: 10px;
+    border: none;
+    border-radius: 3px;
+    background-color: #007bff;
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+.alert {
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 3px;
+}
+
+.alert-danger {
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    color: #721c24;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px; /* Agrega un espacio entre la tabla y los enlaces */
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+.text-center {
+    text-align: center;
+}
+.nav{
+    margin-left: 30%;
+}
+.p,
+.boton {
+    margin: 2% 2%;
+    max-width: 20%;
+    display: inline-block;
+    
+}
+.menu>a{
+    margin-top: 2px;
+    color:rgb(255, 255, 255);
+    display: block;
+}
+.mb-3 {
+    max-width: 60%;
+    margin:2% auto;
+
+}
+.menu{
+    max-width: 20%;
+    margin: 5% auto;
+}
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+a {
+    display: inline-block;
+    padding: 5px 10px;
+    background-color: #000;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 3px;
+}
+
+a:hover {
+    background-color: gray;
+}

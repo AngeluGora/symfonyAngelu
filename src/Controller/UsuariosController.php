@@ -54,15 +54,14 @@ class UsuariosController extends AbstractController
 
     
 
-
     #[Route('/usuarios/{id}/edit', name: 'app_usuario_edit')]
     public function edit(Request $request, Usuario $usuario, UserPasswordHasherInterface $passwordHasher): Response
     {
         $form = $this->createForm(UsuarioType::class, $usuario);
-
+    
         // Guardar la contraseña actual del usuario antes de modificarla
         $contraseñaActual = $usuario->getPassword();
-
+    
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $nuevaContraseña = $usuario->getPassword();
@@ -78,17 +77,35 @@ class UsuariosController extends AbstractController
                 // Mantener la contraseña actual si no se ha modificado
                 $usuario->setPassword($contraseñaActual);
             }
+    
+            // Manejar la foto si se ha cargado un nuevo archivo
+            $fotoFile = $form['foto']->getData();
+            if ($fotoFile) {
+                // Generar un nombre único para el archivo
+                $nombreArchivo = md5(uniqid()) . '.' . $fotoFile->guessExtension();
+
+                // Mover el archivo a un directorio donde se almacenarán las fotos
+                $fotoFile->move(
+                    $this->getParameter('kernel.project_dir') . '/public/images',
+                    $nombreArchivo
+                );
+
+                // Guardar el nombre del archivo en la entidad Usuario
+                $usuario->setFoto($nombreArchivo);
+            }
+    
             // Guardar los cambios del usuario en la base de datos
             $this->entityManager->flush();
-
+    
             // Redirigir a la página de detalles del usuario
             return $this->redirectToRoute('app_usuarios');
         }
-
+    
         return $this->render('usuarios/form.html.twig', [
             'formularioUsuario' => $form->createView(),
         ]);
     }
+    
 
     
 

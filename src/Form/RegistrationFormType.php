@@ -12,6 +12,8 @@ use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Validator\Constraints\File;
 
 class RegistrationFormType extends AbstractType
 {
@@ -30,6 +32,21 @@ class RegistrationFormType extends AbstractType
                     ]),
                 ],
             ])
+            ->add('foto', FileType::class, [
+                'label' => 'Foto de perfil',
+                'mapped' => false,
+                'required' => false,
+                'constraints' => [
+                    new File([
+                        'maxSize' => '1024k',
+                        'mimeTypes' => [
+                            'image/jpeg',
+                            'image/png',
+                        ],
+                        'mimeTypesMessage' => 'Por favor, sube una imagen válida (JPEG, PNG).',
+                    ])
+                ],
+            ])
             ->add('plainPassword', PasswordType::class, [
                 'mapped' => false,
                 'attr' => ['autocomplete' => 'new-password'],
@@ -38,8 +55,8 @@ class RegistrationFormType extends AbstractType
                         'message' => 'Por favor, introduce una contraseña.',
                     ]),
                     new Length([
-                        'min' => 6,
-                        'minMessage' => 'Tu contraseña debe tener al menos {{ limit }} caracteres.',
+                        'min' => 4,
+                        'minMessage' => 'Tu contraseña debe tener mas de 4 caracteres.',
                         'max' => 4096,
                     ]),
                 ],
