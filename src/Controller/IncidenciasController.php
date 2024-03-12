@@ -9,6 +9,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\Request;
 use App\Form\IncidenciaType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 class IncidenciasController extends AbstractController
 {
@@ -18,6 +20,8 @@ class IncidenciasController extends AbstractController
     {
         $this->entityManager = $entityManager;
     }
+    
+    #[IsGranted('ROLE_USER', statusCode: 403, exceptionCode: 10010)]
     #[Route('/incidencias', name: 'app_incidencias')]
     public function index(): Response
     {
@@ -27,7 +31,7 @@ class IncidenciasController extends AbstractController
             'incidencias' => $incidencias,
         ]);
     }
-
+    #[IsGranted('ROLE_USER', statusCode: 403, exceptionCode: 10010)]
     #[Route('/incidencias/{id}', name: 'app_incidencia_show')]
     public function show(int $id): Response
     {
@@ -44,7 +48,7 @@ class IncidenciasController extends AbstractController
             'incidencia' => $incidencia, // Pasar la incidencia a la vista
         ]);
     }
-
+    #[IsGranted('ROLE_USER', statusCode: 403, exceptionCode: 10010)]
     #[Route('/incidencia/new', name: 'app_incidencia_new')]
     public function new(Request $request): Response
     {
@@ -74,7 +78,7 @@ class IncidenciasController extends AbstractController
     
 
 
-
+    #[IsGranted('ROLE_USER', statusCode: 403, exceptionCode: 10010)]
     #[Route('/incidencias/{id}/delete', name: 'app_incidencia_delete')]
     public function delete(Request $request, Incidencia $incidencia, EntityManagerInterface $entityManager): Response
     {
@@ -87,7 +91,7 @@ class IncidenciasController extends AbstractController
         // Redirige a la página de listado de incidencias 
         return $this->redirectToRoute('app_incidencias');
     }
-
+    #[IsGranted('ROLE_USER', statusCode: 403, exceptionCode: 10010)]
     #[Route('/incidencias/{id}/edit', name: 'app_incidencia_edit')]
     public function edit(Request $request, Incidencia $incidencia): Response
     {

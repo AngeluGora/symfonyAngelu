@@ -22,6 +22,7 @@ class UsuariosController extends AbstractController
     {
         $this->entityManager = $entityManager;
     }
+    #[IsGranted('ROLE_USER', statusCode: 403, exceptionCode: 10010)]
     #[Route('/usuarios', name: 'app_usuarios')]
     public function index(): Response
     {
@@ -31,6 +32,7 @@ class UsuariosController extends AbstractController
             'usuarios' => $usuarios,
         ]);
     }
+    #[IsGranted('ROLE_USER', statusCode: 403, exceptionCode: 10010)]
     #[Route('/usuarios/new', name: 'app_usuario_new')]
     public function new(Request $request): Response
     {
@@ -53,7 +55,7 @@ class UsuariosController extends AbstractController
     }
 
     
-
+    #[IsGranted('ROLE_USER', statusCode: 403, exceptionCode: 10010)]
     #[Route('/usuarios/{id}/edit', name: 'app_usuario_edit')]
     public function edit(Request $request, Usuario $usuario, UserPasswordHasherInterface $passwordHasher): Response
     {
@@ -110,7 +112,7 @@ class UsuariosController extends AbstractController
     
 
 
-
+    #[IsGranted('ROLE_USER', statusCode: 403, exceptionCode: 10010)]
     #[Route('/usuarios/{id}', name: 'app_usuario_show')]
     public function show(int $id): Response
     {
@@ -127,7 +129,7 @@ class UsuariosController extends AbstractController
             'usuario' => $usuario, // Pasar el usuario a la vista
         ]);
     }
-
+    #[IsGranted('ROLE_USER', statusCode: 403, exceptionCode: 10010)]
     #[Route('/usuarios/{id}/delete', name: 'app_usuario_delete')]
     public function delete(Request $request, Usuario $usuario): Response
     {
